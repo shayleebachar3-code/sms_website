@@ -49,8 +49,6 @@
     f.appendChild(el('h2', '', 'אישור וחתימה'));
     var checks = [
       ['terms', true, 'קראתי והבנתי את ההסכם, את התקנון ואת תנאי השירות, ואני מסכים/ה להם.'],
-      ['cancel', true, 'קראתי והבנתי את סעיף ההזמנה, המקדמה והביטול, ואני מאשר/ת אותו במפורש.'],
-      ['privacy', true, 'קראתי את מדיניות הפרטיות ואני מסכים/ה לשימוש בפרטיי לצורך ביצוע ההסכם.'],
       ['marketing', false, 'לא חובה: אני מאשר/ת קבלת דיוור והצעות מ"ש.מ.ש משקאות" (וואטסאפ, SMS, אימייל). אפשר להסיר בכל עת.']
     ], cb = {};
     checks.forEach(function (c) { var l = el('label', 'sg-chk'), i = document.createElement('input'); i.type = 'checkbox'; i.name = c[0]; cb[c[0]] = i; l.appendChild(i); l.appendChild(el('span', '', c[2])); f.appendChild(l); });
@@ -63,7 +61,7 @@
     var er = el('p', 'sg-err'); er.setAttribute('role', 'alert'); f.appendChild(er);
     f.addEventListener('submit', function (e) {
       e.preventDefault(); er.textContent = '';
-      if (!cb.terms.checked || !cb.cancel.checked || !cb.privacy.checked) { er.textContent = 'יש לסמן את שלושת האישורים החובה.'; return; }
+      if (!cb.terms.checked) { er.textContent = 'יש לסמן את האישור כדי להמשיך.'; return; }
       if (ni.value.trim().length < 2) { er.textContent = 'נא להזין שם מלא.'; ni.focus(); return; }
       if (!P.has()) { er.textContent = 'נא לחתום באזור החתימה.'; return; }
       go.disabled = true; go.textContent = 'שולח…';

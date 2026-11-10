@@ -510,3 +510,6 @@ footer .lg-links a{color:var(--soft)}
 .flinks a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .flinks a:hover,.flinks a:focus-visible{color:var(--acc)}
 .chk a{color:var(--acc);text-decoration:underline}
+
+.legalbar{border-top:1px solid var(--line);padding-block:22px;text-align:center;font-size:16px;color:var(--soft)}
+.legalbar a{color:var(--acc-hi,#e7c27a);text-decoration:underline;text-underline-offset:3px;margin-inline:10px;font-weight:600}
