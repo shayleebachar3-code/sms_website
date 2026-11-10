@@ -428,50 +428,5 @@ function update() {
   update();
 })();
 
-/* ---------- lead form (Netlify Forms by default, Formspree if configured) ---------- */
-(function () {
-  const form = $('leadForm'), msg = $('formMsg'), btn = $('sendBtn');
-  const set = (id, t) => { $(id).textContent = t; };
-  const hint = $('okHint');
-  const syncOk = () => { const on = $('f-ok').checked; btn.disabled = !on; if (hint) hint.hidden = on; };
-  $('f-ok').addEventListener('change', () => { syncOk(); if ($('f-ok').checked) set('e-ok', ''); });
-  syncOk();
-  form.addEventListener('submit', async e => {
-    e.preventDefault();
-    msg.className = 'fmsg'; msg.textContent = '';
-    const name = $('f-name').value.trim(), phone = $('f-phone').value.replace(/[^\d+]/g, ''), mail = $('f-mail').value.trim();
-    const eN = name.length < 2 ? 'כתבו את השם המלא.' : '';
-    const eP = phone.replace(/\D/g, '').length < 9 ? 'הזינו מספר טלפון תקין.' : '';
-    const eM = mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail) ? 'כתובת האימייל אינה תקינה.' : '';
-    const eK = $('f-ok').checked ? '' : 'יש לסמן את אישור הדיוור ויצירת הקשר כדי לשלוח את הפרטים.';
-    set('e-name', eN); set('e-phone', eP); set('e-mail', eM); set('e-ok', eK);
-    const bad = eN ? 'f-name' : eP ? 'f-phone' : eM ? 'f-mail' : eK ? 'f-ok' : '';
-    if (bad) { $(bad).focus(); return; }
-    if (form.company && form.company.value) return;
-    if (!$('f-ok').checked) { syncOk(); return; }
-    btn.disabled = true; const lab = btn.textContent; btn.textContent = 'שולחים…';
-    try {
-      const fd = new FormData(form);
-      let res;
-      if (SITE.SUPABASE_URL && SITE.SUPABASE_KEY) {
-        // Parameterised REST insert through the Supabase API (PostgREST): no SQL is ever built from user input.
-        const notes = [fd.get('message') || '', fd.get('calc') ? '— סימולציית בר מהאתר —\n' + fd.get('calc') : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]'].filter(Boolean).join('\n\n').slice(0, 6000);
-        res = await fetch(SITE.SUPABASE_URL + '/rest/v1/clients', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', apikey: SITE.SUPABASE_KEY, Authorization: 'Bearer ' + SITE.SUPABASE_KEY, Prefer: 'return=minimal' },
-          body: JSON.stringify({ name, phone: $('f-phone').value.trim(), email: mail || null, notes: notes || null, source: 'אתר' })
-        });
-      } else if (SITE.FORM_ENDPOINT) res = await fetch(SITE.FORM_ENDPOINT, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
-      else res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(fd).toString() });
-      if (!res.ok) throw new Error('bad status');
-      msg.className = 'fmsg ok';
-      msg.textContent = 'תודה, קיבלנו. נחזור אליכם בהקדם עם הצעה.';
-      form.reset(); update(); syncOk();
-    } catch (err) {
-      msg.className = 'fmsg bad';
-      msg.innerHTML = 'לא הצלחנו לשלוח כרגע. אפשר לכתוב לנו ישירות <a href="' + esc(waUrl('היי, השארתי פרטים באתר: ' + name + ', ' + phone)) + '" target="_blank" rel="noopener">בוואטסאפ</a>.';
-    } finally { btn.textContent = lab; syncOk(); }
-  });
-})();
 
 })();
