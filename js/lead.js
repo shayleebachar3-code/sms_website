@@ -28,7 +28,8 @@
     set('e-name', eN); set('e-phone', eP); set('e-mail', eM); set('e-ok', eK);
     var bad = eN ? 'f-name' : eP ? 'f-phone' : eM ? 'f-mail' : eK ? 'f-ok' : '';
     if (bad) { $(bad).focus(); msg.className = 'fmsg bad'; msg.textContent = eK && !eN && !eP && !eM ? eK : 'יש לתקן את השדות המסומנים.'; return; }
-    if (form.company && form.company.value) return;
+    var trap = $('hpTrap');
+    if (trap && trap.value) { /* bot trap: pretend success, send nothing (never a silent dead click for a person) */ msg.className = 'fmsg ok'; msg.textContent = 'תודה, קיבלנו. נחזור אליכם בהקדם עם הצעה.'; return; }
     busy = true; btn.disabled = true; var lab = btn.textContent; btn.textContent = 'שולחים…';
     var calc = $('calcField') ? $('calcField').value : '', message = $('f-msg') ? $('f-msg').value.trim() : '';
     var notes = [message, calc ? '— סימולציית בר מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]'].filter(Boolean).join('\n\n').slice(0, 6000);

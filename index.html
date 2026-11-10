@@ -230,10 +230,10 @@
         <ul class="ticks"><li>הצעה אישית, לפי האיפיון של האירוע</li><li>אם בניתם בר באתר, ההרכב מצורף לפנייה אוטומטית</li><li>אפשר גם לכתוב ישירות בוואטסאפ</li></ul>
         <div class="cta" style="margin-top:30px"><a class="btn wa" href="#" target="_blank" rel="noopener">כתבו לנו בוואטסאפ<span class="sr"> (נפתח בחלון חדש)</span></a><small>מעדיפים הודעה? זו הדרך המהירה</small></div>
       </div>
-      <form class="glass form rv" style="--d:.15s" id="leadForm" name="leads" method="POST" action="/" data-netlify="true" netlify-honeypot="company" novalidate>
+      <form class="glass form rv" style="--d:.15s" id="leadForm" name="leads" method="POST" action="/" novalidate>
         <input type="hidden" name="form-name" value="leads">
         <input type="hidden" name="calc" id="calcField">
-        <p class="hp" aria-hidden="true"><label>אל תמלאו שדה זה <input name="company" tabindex="-1" autocomplete="off"></label></p>
+        <p class="hp" aria-hidden="true"><label>אל תמלאו שדה זה <input name="contact_me_by_fax_only" id="hpTrap" tabindex="-1" autocomplete="off" data-lpignore="true" data-form-type="other"></label></p>
         <div class="row2">
           <label class="f" for="f-name">שם מלא<input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name" role="alert"></span></label>
           <label class="f" for="f-phone">טלפון<input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" style="text-align:right" required aria-describedby="e-phone"><span class="err" id="e-phone" role="alert"></span></label>
@@ -303,7 +303,7 @@
 </div>
 
 <script src="js/config.js?v=3"></script>
-<script src="js/app.js?v=4"></script>
-<script src="js/lead.js?v=4"></script>
+<script src="js/app.js?v=5"></script>
+<script src="js/lead.js?v=5"></script>
 </body>
 </html>
