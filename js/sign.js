@@ -52,6 +52,7 @@
       ['marketing', false, 'לא חובה: אני מאשר/ת קבלת דיוור והצעות מ"ש.מ.ש משקאות" (וואטסאפ, SMS, אימייל). אפשר להסיר בכל עת.']
     ], cb = {};
     checks.forEach(function (c) { var l = el('label', 'sg-chk'), i = document.createElement('input'); i.type = 'checkbox'; i.name = c[0]; cb[c[0]] = i; l.appendChild(i); l.appendChild(el('span', '', c[2])); f.appendChild(l); });
+    var ph0 = el('label', 'sg-f'); ph0.appendChild(el('span', '', 'מספר הטלפון שלך (לאימות הזהות)')); var pi = document.createElement('input'); pi.type = 'tel'; pi.inputMode = 'tel'; pi.autocomplete = 'tel'; pi.maxLength = 20; ph0.appendChild(pi); f.appendChild(ph0);
     var nm = el('label', 'sg-f'); nm.appendChild(el('span', '', 'שם מלא של החותם/ת')); var ni = document.createElement('input'); ni.type = 'text'; ni.autocomplete = 'name'; ni.maxLength = 80; nm.appendChild(ni); f.appendChild(nm);
     f.appendChild(el('span', 'sg-f', '')).innerHTML = '<span>חתימה (בעזרת האצבע או העכבר)</span>';
     var pw = el('div', 'sg-pad'), cv = document.createElement('canvas'); cv.setAttribute('aria-label', 'אזור חתימה'); pw.appendChild(cv); var ph = el('div', 'sg-ph', 'חתמו כאן'); pw.appendChild(ph); f.appendChild(pw);
@@ -63,10 +64,11 @@
       e.preventDefault(); er.textContent = '';
       if (!cb.terms.checked) { er.textContent = 'יש לסמן את האישור כדי להמשיך.'; return; }
       if (ni.value.trim().length < 2) { er.textContent = 'נא להזין שם מלא.'; ni.focus(); return; }
+      if (pi.value.replace(/\D/g, '').length < 9) { er.textContent = 'נא להזין את מספר הטלפון שלך.'; pi.focus(); return; }
       if (!P.has()) { er.textContent = 'נא לחתום באזור החתימה.'; return; }
       go.disabled = true; go.textContent = 'שולח…';
       var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch (x) {}
-      rpc('agreement_sign', { p_token: tok, p_name: ni.value.trim(), p_signature: P.png(), p_consents: { terms: true, cancel: true, privacy: true, marketing: !!cb.marketing.checked }, p_ua: navigator.userAgent, p_tz: tz })
+      rpc('agreement_sign', { p_token: tok, p_name: ni.value.trim(), p_signature: P.png(), p_consents: { terms: true, cancel: true, privacy: true, marketing: !!cb.marketing.checked }, p_ua: navigator.userAgent, p_tz: tz, p_phone: pi.value.trim() })
         .then(function () { return rpc('agreement_get', { p_token: tok }); })
         .then(function (r) { render(r); window.scrollTo(0, 0); })
         .catch(function () { go.disabled = false; go.textContent = 'אני מאשר/ת וחותם/ת'; er.textContent = 'השליחה נכשלה. בדקו את החיבור ונסו שוב, או פנו אלינו.'; });
