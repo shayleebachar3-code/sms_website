@@ -17,8 +17,8 @@ window.SITE = {
   SUPABASE_URL: 'https://qrcdmcrhzhhqhfxxntjb.supabase.co',
   SUPABASE_KEY: 'sb_publishable_Cs-76ga4YG3GIBe2GVORbw_e4PdHk5o',
 
-  DEFAULT_MSG: 'היי, אני מעוניין/ת בהצעה לבר באירוע.'
+  DEFAULT_MSG: 'היי, אני מעוניין/ת בהצעה לחבילת אלכוהול לאירוע.'
 };
 
-/* פרמטרים פנימיים של מחשבון הבר (מקודדים, אין צורך לגעת) */
+/* פרמטרים פנימיים של מחשבון האלכוהול (מקודדים, אין צורך לגעת) */
 window.SITE_CALC = 'eyJiIjp7InYiOjAuMzIsInciOjAuMTksImEiOjAuMjYsImciOjAuMDYsInQiOjAuMDQsImYiOjAuMTN9LCJyIjpbMS43LDEuMywxLDAuNzUsMC41NV0sInAiOls4LDEwXSwibCI6NywiZSI6NCwiYyI6NiwiayI6NDAwfQ==';

@@ -342,17 +342,17 @@ function buildPanels() {
       '<div class="fld">' + label('איזה אירוע?', '') + chips('type', [['wedding', 'חתונה'], ['henna', 'חינה'], ['other', 'אחר']]) + '</div>' +
     '</section>' +
     '<section class="glass panel"><h3><span class="n">2</span>הקהל והערב</h3>' +
-      '<div class="fld">' + label('מי האורחים?', 'הרכב הגילאים הוא אחד המדדים החשובים לבניית הבר.') + chips('aud', [['young', 'צעיר'], ['mixed', 'מעורב'], ['mature', 'בוגר']]) + '</div>' +
-      '<div class="fld">' + label('איזה ערב אתם מדמיינים?', 'ערב עם רחבה פעילה מרגיש אחרת מערב של ארוחה ארוכה, וגם הבר שלו.') + chips('vibe', [['quiet', 'ארוחה ושיחה', 'בעיקר ישיבה'], ['mid', 'שילוב', 'ישיבה וגם ריקודים'], ['party', 'מסיבה', 'רחבה פעילה']]) + '</div>' +
-      '<div class="fld">' + label('עד מתי החגיגה?', 'אורך הערב קובע כמה זמן הבר צריך להישאר מלא.') + chips('end', [['1', 'עד 1:00'], ['3', 'עד 3:00'], ['na', 'עוד לא החלטנו']]) + '</div>' +
+      '<div class="fld">' + label('מי האורחים?', 'הרכב הגילאים הוא אחד המדדים החשובים לבניית החבילה.') + chips('aud', [['young', 'צעיר'], ['mixed', 'מעורב'], ['mature', 'בוגר']]) + '</div>' +
+      '<div class="fld">' + label('איזה ערב אתם מדמיינים?', 'ערב עם רחבה פעילה מרגיש אחרת מערב של ארוחה ארוכה, וגם החבילה שלו.') + chips('vibe', [['quiet', 'ארוחה ושיחה', 'בעיקר ישיבה'], ['mid', 'שילוב', 'ישיבה וגם ריקודים'], ['party', 'מסיבה', 'רחבה פעילה']]) + '</div>' +
+      '<div class="fld">' + label('עד מתי החגיגה?', 'אורך הערב קובע כמה אלכוהול צריך כדי שיספיק עד הסוף.') + chips('end', [['1', 'עד 1:00'], ['3', 'עד 3:00'], ['na', 'עוד לא החלטנו']]) + '</div>' +
     '</section>' +
     '<section class="glass panel"><h3><span class="n">3</span>הטעם</h3>' +
-      '<div class="fld">' + label('מה האורחים שלכם שותים הכי הרבה?', 'הדירוג קובע את חלוקת הבר בין הסוגים. מקום 1 הוא הסוג הכי חשוב לכם.') + rankHtml() + '</div>' +
+      '<div class="fld">' + label('מה האורחים שלכם שותים הכי הרבה?', 'הדירוג קובע את חלוקת החבילה בין הסוגים. מקום 1 הוא הסוג הכי חשוב לכם.') + rankHtml() + '</div>' +
       '<div class="fld"><label class="switch" for="flav"><span>וודקה בטעמים לשוטים</span><input type="checkbox" id="flav" role="switch"' + (S.flav ? ' checked' : '') + '></label></div>' +
-      '<div class="fld">' + label('קוקטייל בר, למשל אפרול ספריץ?', 'קוקטייל בר מוסיף נגיעה מיוחדת וקל לשלב בהרכב.') + chips('cock', [['yes', 'כן, נשמח'], ['no', 'לא צריך'], ['rec', 'תמליצו לנו']]) + '</div>' +
+      '<div class="fld">' + label('קוקטייל, למשל אפרול ספריץ?', 'קוקטייל מוסיף נגיעה מיוחדת וקל לשלב בהרכב.') + chips('cock', [['yes', 'כן, נשמח'], ['no', 'לא צריך'], ['rec', 'תמליצו לנו']]) + '</div>' +
     '</section>' +
     '<section class="glass panel" id="budgetPanel"><h3><span class="n">4</span>התקציב</h3>' +
-      '<div class="fld">' + label('מה טווח התקציב המשוער לבר?', 'עד 30,000 ₪. זה עוזר לנו להתאים הצעה, ואין בזה שום התחייבות.') + chips('budget', [['u10', 'עד 10,000 ₪'], ['m20', '10,000 עד 20,000 ₪'], ['m30', '20,000 עד 30,000 ₪'], ['na', 'עוד לא החלטנו']]) + '</div>' +
+      '<div class="fld">' + label('מה טווח התקציב המשוער לחבילה?', 'עד 30,000 ₪. זה עוזר לנו להתאים הצעה, ואין בזה שום התחייבות.') + chips('budget', [['u10', 'עד 10,000 ₪'], ['m20', '10,000 עד 20,000 ₪'], ['m30', '20,000 עד 30,000 ₪'], ['na', 'עוד לא החלטנו']]) + '</div>' +
     '</section>';
   $('rBars').innerHTML = barsHtml();
 }
@@ -360,7 +360,7 @@ buildPanels();
 
 const R_C = 2 * Math.PI * 52;
 function summary(res) {
-  const lines = ['היי, בניתי באתר בר לאירוע ואשמח להצעה.'];
+  const lines = ['היי, בניתי באתר חבילת אלכוהול לאירוע ואשמח להצעה.'];
   lines.push('אורחים (מקסימום): ' + S.guests, 'יום: ' + DAYS[+S.day], 'אירוע: ' + { wedding: 'חתונה', henna: 'חינה', other: 'אחר' }[S.type]);
   lines.push('קהל: ' + { young: 'צעיר', mixed: 'מעורב', mature: 'בוגר' }[S.aud] + ', ערב: ' + { quiet: 'ארוחה ושיחה', mid: 'שילוב', party: 'מסיבה' }[S.vibe]);
   lines.push('סיום: ' + { '1': 'עד 1:00', '3': 'עד 3:00', na: 'לא הוחלט' }[S.end]);
@@ -389,7 +389,7 @@ function update() {
   $('rwa').href = waUrl(sum);
   $('calcField').value = sum;
   clearTimeout(liveT);
-  liveT = setTimeout(() => { if (res.L !== lastL) { $('live').textContent = 'הבר מתעדכן: כ-' + res.L + ' ליטר אלכוהול, ' + lv[1] + '.'; lastL = res.L; } }, 900);
+  liveT = setTimeout(() => { if (res.L !== lastL) { $('live').textContent = 'החבילה מתעדכנת: כ-' + res.L + ' ליטר אלכוהול, ' + lv[1] + '.'; lastL = res.L; } }, 900);
 }
 
 (function bindCalc() {

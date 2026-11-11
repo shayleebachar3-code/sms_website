@@ -32,7 +32,7 @@
     if (trap && trap.value) { /* bot trap: pretend success, send nothing (never a silent dead click for a person) */ msg.className = 'fmsg ok'; msg.textContent = 'תודה, קיבלנו. נחזור אליכם בהקדם עם הצעה.'; return; }
     busy = true; btn.disabled = true; var lab = btn.textContent; btn.textContent = 'שולחים…';
     var calc = $('calcField') ? $('calcField').value : '', message = $('f-msg') ? $('f-msg').value.trim() : '';
-    var notes = [message, calc ? '— סימולציית בר מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]'].filter(Boolean).join('\n\n').slice(0, 6000);
+    var notes = [message, calc ? '— סימולציית חבילה מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]'].filter(Boolean).join('\n\n').slice(0, 6000);
     var req;
     if (SITE.SUPABASE_URL && SITE.SUPABASE_KEY) {
       req = fetch(SITE.SUPABASE_URL + '/rest/v1/clients', {
