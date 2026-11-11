@@ -513,3 +513,6 @@ footer .lg-links a{color:var(--soft)}
 
 .legalbar{border-top:1px solid var(--line);padding-block:22px;text-align:center;font-size:16px;color:var(--soft)}
 .legalbar a{color:var(--acc-hi,#e7c27a);text-decoration:underline;text-underline-offset:3px;margin-inline:10px;font-weight:600}
+
+/* statutory alcohol warning */
+footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;color:var(--text);font-weight:700;font-size:16px;line-height:1.4;text-align:center;padding:10px 14px}
