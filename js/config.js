@@ -21,4 +21,4 @@ window.SITE = {
 };
 
 /* פרמטרים פנימיים של מחשבון האלכוהול (מקודדים, אין צורך לגעת) */
-window.SITE_CALC = 'eyJiIjp7InYiOjAuMzIsInciOjAuMTksImEiOjAuMjYsImciOjAuMDYsInQiOjAuMDQsImYiOjAuMTN9LCJyIjpbMS43LDEuMywxLDAuNzUsMC41NV0sInAiOls4LDEwXSwibCI6NywiZSI6NCwiYyI6NiwiayI6NDAwfQ==';
+window.SITE_CALC = 'eyJiIjp7InYiOjAuMzIsInciOjAuMTksImEiOjAuMjYsImciOjAuMDYsInQiOjAuMDQsImYiOjAuMTN9LCJyIjpbMS43LDEuMywxLDAuNzUsMC41NV0sInAiOls4LDEwXSwibCI6NywiZCI6WzguNSw4LjUsOCw3LjUsNyw3XSwiZSI6NCwiYyI6NiwiayI6NDAwfQ==';

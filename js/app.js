@@ -265,13 +265,8 @@ const S = { guests: 200, day: '2', type: 'wedding', aud: 'mixed', vibe: 'mid', e
 
 function compute(a) {
   const g = a.guests;
-  const early = +a.day <= 2;
-  let per;
-  if (!early || a.end === '3') per = CFG.l;
-  else {
-    const au = { young: 0, mixed: .5, mature: 1 }[a.aud], vb = { party: 0, mid: .5, quiet: 1 }[a.vibe];
-    per = CFG.p[0] + (CFG.p[1] - CFG.p[0]) * ((au + vb) / 2);
-  }
+  /* guests per liter by weekday (Sun..Fri), same formula as the CRM */
+  const per = (CFG.d || [8.5, 8.5, 8, 7.5, 7, 7])[+a.day] || CFG.l;
   const L = Math.ceil(g / per);
   const sh = {};
   a.rank.forEach((k, i) => { sh[k] = CFG.b[k] * CFG.r[i]; });
@@ -344,7 +339,7 @@ function buildPanels() {
     '<section class="glass panel"><h3><span class="n">2</span>הקהל והערב</h3>' +
       '<div class="fld">' + label('מי האורחים?', 'הרכב הגילאים הוא אחד המדדים החשובים לבניית החבילה.') + chips('aud', [['young', 'צעיר'], ['mixed', 'מעורב'], ['mature', 'בוגר']]) + '</div>' +
       '<div class="fld">' + label('איזה ערב אתם מדמיינים?', 'ערב עם רחבה פעילה מרגיש אחרת מערב של ארוחה ארוכה, וגם החבילה שלו.') + chips('vibe', [['quiet', 'ארוחה ושיחה', 'בעיקר ישיבה'], ['mid', 'שילוב', 'ישיבה וגם ריקודים'], ['party', 'מסיבה', 'רחבה פעילה']]) + '</div>' +
-      '<div class="fld">' + label('עד מתי החגיגה?', 'אורך הערב קובע כמה אלכוהול צריך כדי שיספיק עד הסוף.') + chips('end', [['1', 'עד 1:00'], ['3', 'עד 3:00'], ['na', 'עוד לא החלטנו']]) + '</div>' +
+      '<div class="fld">' + label('עד מתי החגיגה?', 'עוזר לנו לתכנן את האספקה ואת הרזרבה לסוף הערב.') + chips('end', [['1', 'עד 1:00'], ['3', 'עד 3:00'], ['na', 'עוד לא החלטנו']]) + '</div>' +
     '</section>' +
     '<section class="glass panel"><h3><span class="n">3</span>הטעם</h3>' +
       '<div class="fld">' + label('מה האורחים שלכם שותים הכי הרבה?', 'הדירוג קובע את חלוקת החבילה בין הסוגים. מקום 1 הוא הסוג הכי חשוב לכם.') + rankHtml() + '</div>' +
