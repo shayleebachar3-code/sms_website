@@ -32,13 +32,16 @@
     if (trap && trap.value) { /* bot trap: pretend success, send nothing (never a silent dead click for a person) */ msg.className = 'fmsg ok'; msg.textContent = 'תודה, קיבלנו. נחזור אליכם בהקדם עם הצעה.'; return; }
     busy = true; btn.disabled = true; var lab = btn.textContent; btn.textContent = 'שולחים…';
     var calc = $('calcField') ? $('calcField').value : '', message = $('f-msg') ? $('f-msg').value.trim() : '';
-    var notes = [message, calc ? '— סימולציית חבילה מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]'].filter(Boolean).join('\n\n').slice(0, 6000);
+    var attr = null; try { attr = window.SMS_ATTR ? window.SMS_ATTR.get() : null; } catch (x) { attr = null; }
+    var srcLabel = (attr && attr.label) || 'אתר';
+    var attrLine = '[מקור: ' + (attr ? attr.label + (attr.utm_medium ? ' · ' + attr.utm_medium : '') + (attr.utm_campaign ? ' · ' + attr.utm_campaign : '') + (attr.utm_content ? ' · ' + attr.utm_content : '') + (attr.first_touch ? ' · כניסה ראשונה: ' + attr.first_touch : '') : 'כניסה ישירה לאתר') + ']';
+    var notes = [message, calc ? '— סימולציית חבילה מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]', attrLine].filter(Boolean).join('\n\n').slice(0, 6000);
     var req;
     if (SITE.SUPABASE_URL && SITE.SUPABASE_KEY) {
       req = fetch(SITE.SUPABASE_URL + '/rest/v1/clients', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', apikey: SITE.SUPABASE_KEY, Authorization: 'Bearer ' + SITE.SUPABASE_KEY, Prefer: 'return=minimal' },
-        body: JSON.stringify({ name: name, phone: rawPhone, email: mail || null, notes: notes || null, source: 'אתר' })
+        body: JSON.stringify(Object.assign({ name: name, phone: rawPhone, email: mail || null, notes: notes || null, source: srcLabel }, attr ? { prefs: { attribution: attr } } : {}))
       });
     } else req = Promise.reject(new Error('not configured'));
     req.then(function (res) {
