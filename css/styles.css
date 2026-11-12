@@ -534,11 +534,7 @@ footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;col
 .lite #dust{display:none}
 .lite .glow{animation:none}
 .lite .glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(180deg,rgba(22,27,40,.96),rgba(12,16,26,.96))}
-.lite .grad,.lite .sec-head h2 .grad,.lite .vi::before,.lite .vi .ic,.lite .vi .ic::before,.lite .ring-core b,.lite .tr b i,.lite .r-dash,.lite .pill i,.lite .ring.done::before,.lite .tr b.run{animation:none}
-.lite .vi .ic::before{filter:none}
-.lite .sec-head::after,.lite .vi::after,.lite .rt::after,.lite .tr::after,.lite .ticks li::after{display:none}
-.lite .vi,.lite .rt,.lite .ticks li{filter:none;scale:1;transition:none}
-.lite .vi .ic svg{filter:none}
+.lite .grad,.lite .sec-head h2 .grad,.lite .ring-core b,.lite .r-dash,.lite .pill i,.lite .ring.done::before{animation:none}
 .lite .ring::before{filter:none}
 .lite .r-pg{filter:none;opacity:.5}
 .lite .pour::before{filter:none;mix-blend-mode:normal}
@@ -552,3 +548,7 @@ footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;col
 .pour #pourSvg{filter:none}
 .lite .glow{filter:none}
 .lite .totop,.lite .a11y-btn,.lite .a11y-panel{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,14,24,.96)}
+/* spotlight cards keep their full effect on phones too, but on their own GPU layers
+   so the blur/spin is drawn once and only moved or faded */
+.sec-head::after,.vi::after,.rt::after,.tr::after,.ticks li::after{will-change:opacity}
+.vi .ic::before{will-change:transform}

@@ -196,20 +196,21 @@ document.querySelectorAll('a.wa').forEach(a => { if (a.id !== 'rwa') a.href = wa
 /* ---------- scroll spotlight: whatever passes through the middle of the screen lights up ---------- */
 (function () {
   const els = [...document.querySelectorAll('.sec-head, .vi, .rt, .tr, .ticks li')];
-  if (LITE) { els.forEach(e => e.style.setProperty('--f', '.8')); return; }
   const val = new Map(els.map(e => [e, 0]));
   let raf = 0;
   const tick = () => {
     const vh = innerHeight, line = vh * .5; let busy = false;
-    els.forEach(e => {
-      const r = e.getBoundingClientRect(); let t = 0;
+    const rs = els.map(e => e.getBoundingClientRect()); /* read everything first, then write: one layout per frame, no thrash */
+    els.forEach((e, i) => {
+      const r = rs[i]; let t = 0;
       if (r.bottom > 0 && r.top < vh) {
         t = clamp(1 - Math.abs((r.top + r.bottom) / 2 - line) / (vh * .36), 0, 1);
         t = t * t * (3 - 2 * t);
       }
-      let v = val.get(e); v += (t - v) * (RM ? 1 : .14);
+      const old = val.get(e); let v = old + (t - old) * (RM ? 1 : .14);
       if (Math.abs(t - v) < .004) v = t; else busy = true;
-      val.set(e, v); e.style.setProperty('--f', v.toFixed(3));
+      val.set(e, v);
+      if (Math.abs(v - old) > .001) e.style.setProperty('--f', v.toFixed(3));
     });
     raf = busy ? requestAnimationFrame(tick) : 0;
   };
