@@ -33,9 +33,12 @@
     busy = true; btn.disabled = true; var lab = btn.textContent; btn.textContent = 'שולחים…';
     var calc = $('calcField') ? $('calcField').value : '', message = $('f-msg') ? $('f-msg').value.trim() : '';
     var attr = null; try { attr = window.SMS_ATTR ? window.SMS_ATTR.get() : null; } catch (x) { attr = null; }
-    var srcLabel = (attr && attr.label) || 'אתר';
-    var attrLine = '[מקור: ' + (attr ? attr.label + (attr.utm_medium ? ' · ' + attr.utm_medium : '') + (attr.utm_campaign ? ' · ' + attr.utm_campaign : '') + (attr.utm_content ? ' · ' + attr.utm_content : '') + (attr.first_touch ? ' · כניסה ראשונה: ' + attr.first_touch : '') : 'כניסה ישירה לאתר') + ']';
-    var notes = [message, calc ? '— סימולציית חבילה מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]', attrLine].filter(Boolean).join('\n\n').slice(0, 6000);
+    /* source: readable line for the CRM, e.g. "פייסבוק — ממומן — wedding_nov26". Details go to prefs.attribution (a column the site may already write). */
+    var srcLabel = 'אתר — כניסה ישירה';
+    try { if (window.SMS_ATTR && window.SMS_ATTR.sourceText) srcLabel = window.SMS_ATTR.sourceText(attr); else if (attr && attr.label) srcLabel = attr.label; } catch (x) {}
+    var attrLine = '[מקור: ' + (attr ? [attr.label, attr.utm_campaign && 'קמפיין: ' + attr.utm_campaign, attr.utm_term && 'קהל: ' + attr.utm_term, attr.utm_content && 'מודעה: ' + attr.utm_content,
+      attr.utm_medium && 'medium: ' + attr.utm_medium, attr.referrer_host && 'הפניה: ' + attr.referrer_host, attr.app && 'דפדפן: ' + attr.app, attr.first_touch && 'כניסה ראשונה: ' + attr.first_touch].filter(Boolean).join(' · ') : 'כניסה ישירה לאתר') + ']';
+    var notes = [attrLine, message, calc ? '— סימולציית חבילה מהאתר —\n' + calc : '', '[אישור דיוור ויצירת קשר: כן · ' + new Date().toISOString() + ' · תקנון 2026-11-09]'].filter(Boolean).join('\n\n').slice(0, 6000);
     var req;
     if (SITE.SUPABASE_URL && SITE.SUPABASE_KEY) {
       req = fetch(SITE.SUPABASE_URL + '/rest/v1/clients', {
