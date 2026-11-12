@@ -518,3 +518,12 @@ footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;col
 
 /* realistic pour (js/pour.js): hide the CSS fallback once the live scene runs */
 .pour-on .pour-static{display:none}
+
+/* original brand logo: gold hand-and-glass mark, gold bar, S.M.S DRINKS / JUST MAKE HAPPY */
+.logo{flex-direction:row;direction:ltr;align-items:center;gap:clamp(14px,1.8vw,24px)}
+.logo .lm{height:clamp(84px,10.4vw,134px);width:auto;transform:translateZ(26px);filter:drop-shadow(0 6px 14px rgba(0,0,0,.6)) drop-shadow(0 0 18px rgba(var(--acc-rgb),.25))}
+.logo .lb{width:3px;align-self:stretch;margin-block:4px;border-radius:2px;background:linear-gradient(180deg,#f6e2a8,#b8893a 60%,#7a5a22);transform:translateZ(18px)}
+.logo .lt{display:flex;flex-direction:column;gap:8px;text-align:left;transform:translateZ(22px)}
+.logo .lt b{font-family:'Montserrat',var(--body);font-weight:700;font-size:clamp(30px,4.2vw,54px);letter-spacing:.02em;line-height:1;white-space:nowrap;color:transparent;background:linear-gradient(180deg,#fff3cf 0%,#e8c77e 45%,#b8893a 72%,#f0d58f 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 2px 0 #5a4116) drop-shadow(0 0 14px rgba(var(--acc-rgb),.25))}
+.logo .lt small{font-family:'Montserrat',var(--body);font-weight:400;font-size:clamp(12px,1.55vw,20px);letter-spacing:.06em;line-height:1;color:var(--acc-hi)}
+@media (max-width:640px){.logo{gap:10px;padding-inline:14px}.logo .lm{height:66px}.logo .lt b{font-size:24px}.logo .lt small{font-size:10.5px;white-space:nowrap}}
