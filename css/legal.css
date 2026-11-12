@@ -16,3 +16,5 @@
 .lg-upd{color:var(--muted)!important;font-size:14px!important}
 .lg-contact{margin-top:18px;padding:14px 18px;border:1px solid var(--line);border-radius:10px}.lg-contact a{color:var(--acc)}
 footer a[href^="tel"],footer a[href^="mailto"]{color:inherit;text-decoration:underline;text-underline-offset:3px}
+
+picture{display:contents}

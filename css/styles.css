@@ -552,3 +552,9 @@ footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;col
    so the blur/spin is drawn once and only moved or faded */
 .sec-head::after,.vi::after,.rt::after,.tr::after,.ticks li::after{will-change:opacity}
 .vi .ic::before{will-change:transform}
+
+/* Mobile speed: on phones the hero shows at once (no waiting for JS + 1.2s fade), other reveals are shorter */
+.js.lite .hero .rv{opacity:1;transform:none;transition:none}
+.js.lite .rv{transition-duration:.5s;transition-delay:0s}
+
+picture{display:contents}
