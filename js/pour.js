@@ -11,7 +11,7 @@
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
   var $ = function (id) { return document.getElementById(id); };
   var dyn = $('pDyn'), sl = $('pStreamL'), bot = $('pBottle'), glint = $('pGlint');
-  var glow = $('pGlow'), table = $('pTable'), refl = $('pRefl');
+  var bg = $('pourBg'), bgO = -1;
   if (!dyn || !sl || !bot) return;
   function mk(tag, a, p) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); if (p) p.appendChild(e); return e; }
   function still() { return (mq && mq.matches) || root.classList.contains('a11y-still'); }
@@ -194,9 +194,8 @@
     men.setAttribute('d', show ? poly(front.slice(2, NW - 2), true) : '');
     var fr = vol / MAXH;
     caus.setAttribute('opacity', (fr * .9).toFixed(3));
-    if (glow) glow.setAttribute('opacity', (.05 + .13 * fr).toFixed(3));
-    if (table) table.setAttribute('opacity', (.08 + .22 * fr).toFixed(3));
-    if (refl) refl.setAttribute('opacity', (.08 + .16 * fr).toFixed(3));
+    var o2 = Math.round((.5 + .5 * fr) * 25) / 25; /* quantized: few updates, compositor only */
+    if (bg && o2 !== bgO) { bgO = o2; bg.style.opacity = o2; }
     ICE.forEach(function (c) {
       var tr = 'translate(' + (c.x + c.dx).toFixed(2) + ' ' + c.y.toFixed(2) + ') rotate(' + c.a.toFixed(2) + ')';
       c.o.setAttribute('transform', tr); c.f.setAttribute('transform', tr); c.s.setAttribute('transform', tr);

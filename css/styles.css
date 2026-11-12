@@ -527,3 +527,28 @@ footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;col
 .logo .lt b{font-family:'Montserrat',var(--body);font-weight:700;font-size:clamp(30px,4.2vw,54px);letter-spacing:.02em;line-height:1;white-space:nowrap;color:transparent;background:linear-gradient(180deg,#fff3cf 0%,#e8c77e 45%,#b8893a 72%,#f0d58f 100%);-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 2px 0 #5a4116) drop-shadow(0 0 14px rgba(var(--acc-rgb),.25))}
 .logo .lt small{font-family:'Montserrat',var(--body);font-weight:400;font-size:clamp(12px,1.55vw,20px);letter-spacing:.06em;line-height:1;color:var(--acc-hi)}
 @media (max-width:640px){.logo{gap:10px;padding-inline:14px}.logo .lm{height:66px}.logo .lt b{font-size:24px}.logo .lt small{font-size:10.5px;white-space:nowrap}}
+
+/* ===== lite mode (phones and touch tablets): same look, no continuous repaints =====
+   html.lite is set in <head> for touch / narrow screens. Rule: nothing repaints every frame
+   except the hero pour; no full-screen blend layers, no animated blurs, no backdrop blur. */
+.lite #dust{display:none}
+.lite .glow{animation:none}
+.lite .glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:linear-gradient(180deg,rgba(22,27,40,.96),rgba(12,16,26,.96))}
+.lite .grad,.lite .sec-head h2 .grad,.lite .vi::before,.lite .vi .ic,.lite .vi .ic::before,.lite .ring-core b,.lite .tr b i,.lite .r-dash,.lite .pill i,.lite .ring.done::before,.lite .tr b.run{animation:none}
+.lite .vi .ic::before{filter:none}
+.lite .sec-head::after,.lite .vi::after,.lite .rt::after,.lite .tr::after,.lite .ticks li::after{display:none}
+.lite .vi,.lite .rt,.lite .ticks li{filter:none;scale:1;transition:none}
+.lite .vi .ic svg{filter:none}
+.lite .ring::before{filter:none}
+.lite .r-pg{filter:none;opacity:.5}
+.lite .pour::before{filter:none;mix-blend-mode:normal}
+.lite .pour svg{filter:none}
+.lite .logo{transform:none}
+.lite .logo::after{display:none}
+
+/* pour: blurred glows live in a static back layer (#pourBg); only its opacity changes (compositor-only) */
+.pour>svg{grid-area:1/1}
+.pour .pour-bg{will-change:opacity;pointer-events:none}
+.pour #pourSvg{filter:none}
+.lite .glow{filter:none}
+.lite .totop,.lite .a11y-btn,.lite .a11y-panel{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,14,24,.96)}

@@ -11,6 +11,7 @@ const store = {
   set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 };
 const root = document.documentElement;
+const LITE = root.classList.contains('lite'); /* phones / touch: no per-frame effects */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
 /* ---------- WhatsApp ---------- */
@@ -195,6 +196,7 @@ document.querySelectorAll('a.wa').forEach(a => { if (a.id !== 'rwa') a.href = wa
 /* ---------- scroll spotlight: whatever passes through the middle of the screen lights up ---------- */
 (function () {
   const els = [...document.querySelectorAll('.sec-head, .vi, .rt, .tr, .ticks li')];
+  if (LITE) { els.forEach(e => e.style.setProperty('--f', '.8')); return; }
   const val = new Map(els.map(e => [e, 0]));
   let raf = 0;
   const tick = () => {
@@ -233,8 +235,15 @@ document.querySelectorAll('a.wa').forEach(a => { if (a.id !== 'rwa') a.href = wa
 /* ---------- drifting gold dust (parallax with scroll) ---------- */
 (function () {
   const cv = $('dust'); if (!cv || !cv.getContext) return;
-  const ctx = cv.getContext('2d'); let W = 0, H = 0, dpr = 1, ps = [], raf = 0;
+  if (LITE) { cv.remove(); return; }
+  const ctx = cv.getContext('2d'); let W = 0, H = 0, dpr = 1, ps = [], raf = 0, lastW = 0;
+  /* one pre-blurred glow sprite, stamped with drawImage (shadowBlur per particle is very slow) */
+  const spr = document.createElement('canvas'); spr.width = spr.height = 64;
+  (() => { const g = spr.getContext('2d'), rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    rg.addColorStop(0, 'rgba(255,240,205,1)'); rg.addColorStop(.18, 'rgba(235,211,160,.9)'); rg.addColorStop(.45, 'rgba(217,186,124,.28)'); rg.addColorStop(1, 'rgba(217,186,124,0)');
+    g.fillStyle = rg; g.fillRect(0, 0, 64, 64); })();
   const init = () => {
+    lastW = innerWidth;
     dpr = Math.min(2, devicePixelRatio || 1); W = cv.width = Math.round(innerWidth * dpr); H = cv.height = Math.round(innerHeight * dpr);
     const n = clamp(Math.round(innerWidth * innerHeight / 24000), 16, 56);
     ps = Array.from({ length: n }, () => ({ x: Math.random(), y: Math.random(), r: .6 + Math.random() * 1.8, d: .15 + Math.random() * .85, s: .5 + Math.random() * 1.2, ph: Math.random() * 6.28, a: .2 + Math.random() * .4 }));
@@ -245,14 +254,15 @@ document.querySelectorAll('a.wa').forEach(a => { if (a.id !== 'rwa') a.href = wa
       const y = (((p.y * H - scrollY * p.d * .4 * dpr - (RM ? 0 : t * .005 * p.s * dpr)) % H) + H) % H;
       const x = (p.x * W + (RM ? 0 : Math.sin(t * .0003 * p.s + p.ph) * 26 * dpr)) % W;
       const tw = RM ? .8 : .55 + .45 * Math.sin(t * .0012 * p.s + p.ph);
-      ctx.beginPath(); ctx.fillStyle = 'rgba(235,211,160,' + (p.a * tw).toFixed(3) + ')';
-      ctx.shadowColor = 'rgba(217,186,124,.9)'; ctx.shadowBlur = 10 * dpr * p.d;
-      ctx.arc(x, y, p.r * dpr, 0, 6.2832); ctx.fill();
+      const s = (p.r * 2.2 + 10 * p.d) * dpr;
+      ctx.globalAlpha = p.a * tw; ctx.drawImage(spr, x - s, y - s, s * 2, s * 2);
     }
-    raf = RM ? 0 : requestAnimationFrame(draw);
+    ctx.globalAlpha = 1;
+    raf = RM || document.hidden ? 0 : requestAnimationFrame(draw);
   };
   init(); draw(0);
-  addEventListener('resize', () => { init(); if (RM) draw(0); });
+  addEventListener('resize', () => { if (innerWidth === lastW) return; init(); if (RM) draw(0); });
+  document.addEventListener('visibilitychange', () => { if (!document.hidden && !raf && !RM) raf = requestAnimationFrame(draw); });
 })();
 
 /* ---------- calculator ---------- */

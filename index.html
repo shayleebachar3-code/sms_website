@@ -13,9 +13,10 @@
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;700&family=Heebo:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="css/styles.css?v=5">
-<script>document.documentElement.classList.add('js');</script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;700&family=Heebo:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;700&family=Heebo:wght@300;400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="css/styles.css?v=6">
+<script>(function(d){d.classList.add('js');try{if(matchMedia('(hover:none),(pointer:coarse),(max-width:900px)').matches)d.classList.add('lite')}catch(e){}})(document.documentElement);</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"ש.מ.ש משקאות","alternateName":"S.M.S Drinks","description":"חבילות אלכוהול לאירועים ללא התעסקות, עם זיכוי על בקבוק סגור.","areaServed":"IL"}
 </script>
@@ -58,6 +59,15 @@
         </div>
       </div>
       <div class="pour rv" style="--d:.3s" role="img" aria-label="וויסקי ענברי נמזג לתוך כוס קריסטל עם קרח">
+        <svg class="pour-bg" id="pourBg" viewBox="0 -80 320 480" focusable="false" aria-hidden="true">
+          <g fill="#ffb347" filter="url(#bk)"><circle cx="56" cy="96" r="18" opacity=".16"/><circle cx="268" cy="70" r="26" opacity=".12"/><circle cx="34" cy="238" r="13" opacity=".14"/><circle cx="288" cy="262" r="20" opacity=".12"/><circle cx="226" cy="26" r="12" opacity=".16"/></g>
+          <g id="pLit">
+            <ellipse cx="160" cy="230" rx="118" ry="96" fill="#ff9d2e" opacity=".18" filter="url(#bl)"/>
+            <ellipse cx="160" cy="356" rx="150" ry="14" fill="#d98a22" opacity=".3" filter="url(#bl)"/>
+            <g mask="url(#rfm)" opacity=".24"><g transform="translate(0 684) scale(1 -1)"><path d="M60 120 L260 120 L248 330 Q247 340 237 340 L83 340 Q73 340 72 330 Z" fill="#ff9d2e" fill-opacity=".3" stroke="#fff" stroke-opacity=".5"/></g></g>
+          </g>
+          <ellipse cx="160" cy="347" rx="98" ry="6" fill="#000" opacity=".55"/>
+        </svg>
         <svg id="pourSvg" viewBox="0 -80 320 480" focusable="false" aria-hidden="true">
           <defs>
             <linearGradient id="gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a2204"/><stop offset=".12" stop-color="#8c4a0a"/><stop offset=".35" stop-color="#d58a22"/><stop offset=".5" stop-color="#f6bd5e"/><stop offset=".68" stop-color="#cf8220"/><stop offset=".88" stop-color="#7a3d08"/><stop offset="1" stop-color="#3c1a03"/></linearGradient>
@@ -82,11 +92,6 @@
             <linearGradient id="sf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6ad"/><stop offset="1" stop-color="#e5a14a"/></linearGradient>
             <linearGradient id="gli" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
           </defs>
-          <g fill="#ffb347" filter="url(#bk)"><circle cx="56" cy="96" r="18" opacity=".16"/><circle cx="268" cy="70" r="26" opacity=".12"/><circle cx="34" cy="238" r="13" opacity=".14"/><circle cx="288" cy="262" r="20" opacity=".12"/><circle cx="226" cy="26" r="12" opacity=".16"/></g>
-          <ellipse id="pGlow" cx="160" cy="230" rx="118" ry="96" fill="#ff9d2e" opacity=".16" filter="url(#bl)"/>
-          <ellipse id="pTable" cx="160" cy="356" rx="150" ry="14" fill="#d98a22" opacity=".26" filter="url(#bl)"/>
-          <ellipse cx="160" cy="347" rx="98" ry="6" fill="#000" opacity=".55"/>
-          <g id="pRefl" mask="url(#rfm)" opacity=".22"><g transform="translate(0 684) scale(1 -1)"><path d="M60 120 L260 120 L248 330 Q247 340 237 340 L83 340 Q73 340 72 330 Z" fill="#ff9d2e" fill-opacity=".3" stroke="#fff" stroke-opacity=".5"/></g></g>
           <g class="pour-static"><g mask="url(#sm)"><rect class="stream" x="156" y="0" width="8" height="190" rx="4" fill="url(#gs)"/><rect class="stream" x="158.6" y="0" width="2.2" height="190" rx="1.1" fill="#fff3cf" fill-opacity=".7"/></g>
           <g clip-path="url(#cp)"><g class="liq">
             <rect x="60" y="190" width="200" height="160" fill="url(#gl)"/>
@@ -315,7 +320,7 @@
 <script src="js/config.js?v=5"></script>
 <script src="js/app.js?v=8"></script>
 <script src="js/lead.js?v=7"></script>
-<script src="js/pour.js?v=1"></script>
+<script src="js/pour.js?v=2"></script>
 <script src="js/track.js?v=1"></script>
 </body>
 </html>
