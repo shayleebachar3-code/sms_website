@@ -505,14 +505,16 @@ html.a11y-still .ring::before,html.a11y-still .ring-core b,html.a11y-still .vi .
 
 .okhint{font-size:13.5px;color:var(--muted);margin:10px 0 0}
 .chk a{color:var(--acc-hi)}
-footer .lg-links a{color:var(--soft)}
+footer .flinks{color:var(--soft)}
+footer .fnote{flex-basis:100%;font-size:13.5px;color:var(--muted)}
 
 .flinks a{color:inherit;text-decoration:underline;text-underline-offset:3px}
 .flinks a:hover,.flinks a:focus-visible{color:var(--acc)}
 .chk a{color:var(--acc);text-decoration:underline}
 
-.legalbar{border-top:1px solid var(--line);padding-block:22px;text-align:center;font-size:16px;color:var(--soft)}
-.legalbar a{color:var(--acc-hi,#e7c27a);text-decoration:underline;text-underline-offset:3px;margin-inline:10px;font-weight:600}
 
 /* statutory alcohol warning */
 footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;color:var(--text);font-weight:700;font-size:16px;line-height:1.4;text-align:center;padding:10px 14px}
+
+/* realistic pour (js/pour.js): hide the CSS fallback once the live scene runs */
+.pour-on .pour-static{display:none}
