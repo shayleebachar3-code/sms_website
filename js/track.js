@@ -6,6 +6,8 @@
   var S = window.SITE || {};
   if (!S.SUPABASE_URL || !S.SUPABASE_KEY || !window.fetch || !document.querySelector) return;
   /* owner opt-out: open the site once with ?notrack=1 on a device and it is never counted again (?notrack=0 turns it back on) */
+  /* never count local files / dev hosts (my own tests) */
+  if (location.protocol==='file:'||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)||/\.(localhost|test)$/.test(location.hostname)) return;
   try {
     if (/[?&]notrack=1(&|$)/.test(location.search)) localStorage.setItem('sms_notrack', '1');
     else if (/[?&]notrack=0(&|$)/.test(location.search)) localStorage.removeItem('sms_notrack');
