@@ -15,7 +15,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;700&family=Heebo:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;700&family=Heebo:wght@300;400;500;600;700&display=swap"></noscript>
-<link rel="stylesheet" href="css/styles.css?v=8">
+<link rel="preload" as="image" href="assets/hero-bg.webp" media="(min-width:1021px)" fetchpriority="high">
+<link rel="stylesheet" href="css/styles.css?v=9">
 <script>(function(d){d.classList.add('js');try{if(matchMedia('(hover:none),(pointer:coarse),(max-width:900px)').matches)d.classList.add('lite')}catch(e){}})(document.documentElement);</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LocalBusiness","name":"ש.מ.ש משקאות","alternateName":"S.M.S Drinks","description":"חבילות אלכוהול לאירועים ללא התעסקות, עם זיכוי על בקבוק סגור.","areaServed":"IL"}
@@ -47,6 +48,8 @@
 
 <main id="main">
   <section class="hero" id="top" aria-labelledby="t-hero">
+    <div class="hero-photo" aria-hidden="true"><picture><source media="(max-width:1020px)" srcset="assets/hero-bg-900.webp"><img src="assets/hero-bg.webp" alt="" width="1672" height="941" fetchpriority="high" decoding="async"></picture><canvas id="heroFx"></canvas></div>
+    
     <div class="glow a"></div><div class="glow b"></div><div class="grid-bg"></div>
     <div class="wrap">
       <div>
@@ -58,70 +61,7 @@
           <div class="cta"><a class="btn ghost wa" href="#" target="_blank" rel="noopener">כתבו לנו בוואטסאפ<span class="sr"> (נפתח בחלון חדש)</span></a><small>ההודעה כבר מוכנה, נשאר ללחוץ שליחה</small></div>
         </div>
       </div>
-      <div class="pour rv" style="--d:.3s" role="img" aria-label="וויסקי ענברי נמזג לתוך כוס קריסטל עם קרח">
-        <svg class="pour-bg" id="pourBg" viewBox="0 -80 320 480" focusable="false" aria-hidden="true">
-          <g fill="#ffb347" filter="url(#bk)"><circle cx="56" cy="96" r="18" opacity=".16"/><circle cx="268" cy="70" r="26" opacity=".12"/><circle cx="34" cy="238" r="13" opacity=".14"/><circle cx="288" cy="262" r="20" opacity=".12"/><circle cx="226" cy="26" r="12" opacity=".16"/></g>
-          <g id="pLit">
-            <ellipse cx="160" cy="230" rx="118" ry="96" fill="#ff9d2e" opacity=".18" filter="url(#bl)"/>
-            <ellipse cx="160" cy="356" rx="150" ry="14" fill="#d98a22" opacity=".3" filter="url(#bl)"/>
-            <g mask="url(#rfm)" opacity=".24"><g transform="translate(0 684) scale(1 -1)"><path d="M60 120 L260 120 L248 330 Q247 340 237 340 L83 340 Q73 340 72 330 Z" fill="#ff9d2e" fill-opacity=".3" stroke="#fff" stroke-opacity=".5"/></g></g>
-          </g>
-          <ellipse cx="160" cy="347" rx="98" ry="6" fill="#000" opacity=".55"/>
-        </svg>
-        <svg id="pourSvg" viewBox="0 -80 320 480" focusable="false" aria-hidden="true">
-          <defs>
-            <linearGradient id="gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#4a2204"/><stop offset=".12" stop-color="#8c4a0a"/><stop offset=".35" stop-color="#d58a22"/><stop offset=".5" stop-color="#f6bd5e"/><stop offset=".68" stop-color="#cf8220"/><stop offset=".88" stop-color="#7a3d08"/><stop offset="1" stop-color="#3c1a03"/></linearGradient>
-            <linearGradient id="gd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1000" stop-opacity="0"/><stop offset="1" stop-color="#2a1000" stop-opacity=".5"/></linearGradient>
-            <radialGradient id="cg" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe0a0" stop-opacity=".75"/><stop offset="1" stop-color="#ffd993" stop-opacity="0"/></radialGradient>
-            <linearGradient id="gs" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#a95f10"/><stop offset=".5" stop-color="#ffd886"/><stop offset="1" stop-color="#a95f10"/></linearGradient>
-            <linearGradient id="ge" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset=".5" stop-color="#fff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity=".4"/></linearGradient>
-            <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".2"/><stop offset="1" stop-color="#cfe9ef" stop-opacity=".07"/></linearGradient>
-            <linearGradient id="ig" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".62"/><stop offset=".55" stop-color="#e8f6ff" stop-opacity=".14"/><stop offset="1" stop-color="#fff" stop-opacity=".34"/></linearGradient>
-            <linearGradient id="gf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".16" stop-color="#fff" stop-opacity="1"/></linearGradient>
-            <linearGradient id="rff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".9"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-            <mask id="sm" maskUnits="userSpaceOnUse" x="0" y="0" width="320" height="400"><rect width="320" height="400" fill="url(#gf)"/></mask>
-            <mask id="rfm" maskUnits="userSpaceOnUse" x="0" y="344" width="320" height="56"><rect x="0" y="344" width="320" height="56" fill="url(#rff)"/></mask>
-            <filter id="bl" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="24"/></filter>
-            <filter id="bk" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="7"/></filter>
-            <filter id="sb" x="-50%" y="-10%" width="200%" height="120%"><feGaussianBlur stdDeviation="1.6"/></filter>
-            <clipPath id="cp"><path d="M68 122 L252 122 L242 306 L78 306 Z"/></clipPath>
-            <clipPath id="gcl"><path d="M60 120 L260 120 L248 330 Q247 340 237 340 L83 340 Q73 340 72 330 Z"/></clipPath>
-            <linearGradient id="bt" gradientUnits="userSpaceOnUse" x1="-27" y1="0" x2="27" y2="0"><stop offset="0" stop-color="#0d0500"/><stop offset=".16" stop-color="#341804"/><stop offset=".3" stop-color="#7c420f"/><stop offset=".4" stop-color="#b97424"/><stop offset=".52" stop-color="#6a370b"/><stop offset=".82" stop-color="#271102"/><stop offset="1" stop-color="#0a0400"/></linearGradient>
-            <linearGradient id="bf" gradientUnits="userSpaceOnUse" x1="-7" y1="0" x2="7" y2="0"><stop offset="0" stop-color="#5a4116"/><stop offset=".3" stop-color="#d8bb76"/><stop offset=".45" stop-color="#fff1c4"/><stop offset=".7" stop-color="#a88238"/><stop offset="1" stop-color="#4a3410"/></linearGradient>
-            <linearGradient id="lbl" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b9a578"/><stop offset=".28" stop-color="#efe2c4"/><stop offset=".45" stop-color="#fbf4e3"/><stop offset=".75" stop-color="#dccba3"/><stop offset="1" stop-color="#a8925f"/></linearGradient>
-            <linearGradient id="sf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe6ad"/><stop offset="1" stop-color="#e5a14a"/></linearGradient>
-            <linearGradient id="gli" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          </defs>
-          <g class="pour-static"><g mask="url(#sm)"><rect class="stream" x="156" y="0" width="8" height="190" rx="4" fill="url(#gs)"/><rect class="stream" x="158.6" y="0" width="2.2" height="190" rx="1.1" fill="#fff3cf" fill-opacity=".7"/></g>
-          <g clip-path="url(#cp)"><g class="liq">
-            <rect x="60" y="190" width="200" height="160" fill="url(#gl)"/>
-            <rect x="60" y="190" width="200" height="160" fill="url(#gd)"/>
-            <ellipse cx="160" cy="298" rx="84" ry="26" fill="url(#cg)"/>
-            <g class="ice"><path d="M126 197 Q126 189 134 188 L164 185 Q172 184 173 192 L175 219 Q175 227 167 228 L138 231 Q130 232 129 224 Z" fill="url(#ig)" stroke="#fff" stroke-opacity=".55"/><path d="M130 201 L172 197 M131 224 L173 220" stroke="#fff" stroke-opacity=".28" fill="none"/><path d="M134 192 L150 190 L146 222 L136 224 Z" fill="#fff" fill-opacity=".22"/></g>
-            <g class="ice i2"><path d="M190 214 Q190 208 196 207 L214 205 Q220 205 220 211 L221 228 Q221 234 215 235 L197 237 Q191 238 191 232 Z" fill="url(#ig)" stroke="#fff" stroke-opacity=".5"/><path d="M193 211 L205 210 L203 232 L194 233 Z" fill="#fff" fill-opacity=".2"/></g>
-            <ellipse class="surf" cx="160" cy="190" rx="92" ry="6" fill="#f9d28a" opacity=".85"/>
-            <circle class="bub" cx="128" cy="288" r="2.2" fill="#ffe2a3"/>
-            <circle class="bub b2" cx="176" cy="276" r="1.8" fill="#ffe2a3"/>
-            <circle class="bub b3" cx="204" cy="292" r="2.4" fill="#ffe2a3"/>
-            <circle class="bub b4" cx="150" cy="298" r="1.5" fill="#ffe2a3"/>
-          </g></g></g>
-          <g id="pDyn" clip-path="url(#cp)"></g>
-          <g id="pStreamL"></g>
-          <path d="M60 120 L260 120 L248 330 Q247 340 237 340 L83 340 Q73 340 72 330 Z" fill="#fff" fill-opacity=".04" stroke="url(#ge)" stroke-width="1.6"/>
-          <path d="M68 122 L252 122 L242 306 L78 306 Z" fill="none" stroke="#fff" stroke-opacity=".16"/>
-          <path d="M78 306 L242 306 L248 330 Q247 340 237 340 L83 340 Q73 340 72 330 Z" fill="url(#gb)"/>
-          <ellipse cx="160" cy="306" rx="82" ry="5" fill="none" stroke="#fff" stroke-opacity=".22"/>
-          <path d="M86 314 Q160 334 234 314" stroke="#fff" stroke-opacity=".2" fill="none"/>
-          <ellipse cx="160" cy="120" rx="100" ry="7" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".5"/>
-          <ellipse cx="160" cy="121" rx="92" ry="5.2" fill="none" stroke="#fff" stroke-opacity=".28"/>
-          <path d="M80 130 L93 130 L101 298 L91 298 Z" fill="#fff" opacity=".24" filter="url(#sb)"/>
-          <path d="M232 134 L238 134 L231 292 L226 292 Z" fill="#ffb15a" opacity=".22" filter="url(#sb)"/>
-          <path d="M243 130 L246 130 L241 300 L238 300 Z" fill="#fff" opacity=".18"/>
-          <circle cx="96" cy="150" r="2" fill="#fff" opacity=".8"/>
-          <g clip-path="url(#gcl)"><rect id="pGlint" x="-80" y="90" width="44" height="280" fill="url(#gli)" opacity="0" transform="skewX(-16)"/></g>
-          <g id="pBottle" opacity="0"></g>
-        </svg>
-      </div>
+      
     </div>
     <div class="scroll-cue" aria-hidden="true"><i></i></div>
   </section>
@@ -320,7 +260,7 @@
 <script src="js/config.js?v=5"></script>
 <script src="js/app.js?v=9"></script>
 <script src="js/lead.js?v=8"></script>
-<script src="js/pour.js?v=2"></script>
+<script src="js/hero-fx.js?v=1" defer></script>
 <script src="js/track.js?v=2"></script>
 </body>
 </html>
