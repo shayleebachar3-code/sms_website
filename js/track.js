@@ -5,6 +5,12 @@
   'use strict';
   var S = window.SITE || {};
   if (!S.SUPABASE_URL || !S.SUPABASE_KEY || !window.fetch || !document.querySelector) return;
+  /* owner opt-out: open the site once with ?notrack=1 on a device and it is never counted again (?notrack=0 turns it back on) */
+  try {
+    if (/[?&]notrack=1(&|$)/.test(location.search)) localStorage.setItem('sms_notrack', '1');
+    else if (/[?&]notrack=0(&|$)/.test(location.search)) localStorage.removeItem('sms_notrack');
+    if (localStorage.getItem('sms_notrack') === '1') return;
+  } catch (e) {}
   if (navigator.doNotTrack === '1' || window.doNotTrack === '1') return;
   if (navigator.webdriver || /bot|crawl|spider|slurp|lighthouse|headless|preview/i.test(navigator.userAgent || '')) return;
 
