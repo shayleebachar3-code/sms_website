@@ -560,10 +560,10 @@ footer .alcwarn{flex-basis:100%;border:2px solid var(--text);background:#000;col
 picture{display:contents}
 
 /* ===== hero photo + sparkle ===== */
-.hero-photo{position:absolute;left:0;right:0;bottom:0;top:var(--hp-top,-335px);z-index:0;overflow:hidden;background:#050403}
+.hero-photo{position:absolute;left:0;right:0;bottom:0;top:var(--hp-top,-335px);z-index:0;overflow:hidden;background:var(--bg)}
 .hero-photo img,.hero-photo canvas{position:absolute;left:0;top:0;width:100%;height:auto;aspect-ratio:1672/941;display:block}
 .hero-photo img{object-fit:cover;object-position:left center}
-.hero-photo::before{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;z-index:1;background:linear-gradient(transparent,var(--bg));pointer-events:none}
+.hero-photo::before{content:"";position:absolute;left:0;top:0;width:100%;aspect-ratio:1672/941;z-index:1;background:linear-gradient(180deg,transparent 52%,rgba(var(--bg-rgb,5,6,10),.0) 52%,var(--bg) 97%);pointer-events:none}
 .hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(270deg,rgba(5,4,3,.82) 0%,rgba(5,4,3,.55) 38%,rgba(5,4,3,0) 62%)}
 .hero .glow,.hero .grid-bg,.hero .pour{display:none!important}
 .hero{min-height:max(560px,calc(100vh - 335px));align-items:center;overflow:visible}.hero::before{display:none}
@@ -575,4 +575,5 @@ html.a11y-contrast .hero-photo{display:none}
 .hero-photo img,.hero-photo canvas{height:100%;aspect-ratio:auto}
 .hero-photo img{object-position:18% center}
 .hero-photo::after{background:linear-gradient(180deg,rgba(5,4,3,0) 55%,var(--bg) 100%)}
+.hero-photo::before{display:none}
 .hero .wrap{padding-top:calc(min(88vw,520px) + 6px)}}
