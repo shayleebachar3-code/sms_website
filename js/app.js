@@ -319,7 +319,8 @@ function fillBars(box, qty) {
     const k = r.dataset.k, v = qty[k];
     r.hidden = v === 0;
     r.querySelector('i').style.width = Math.round(v / mx * 100) + '%';
-    r.querySelector('.n').textContent = v;
+    /* exact bottle counts are not shown: they are sent on WhatsApp / with the quote */
+    const n = r.querySelector('.n'); n.textContent = ''; n.classList.add('lk'); n.setAttribute('aria-label', 'הכמות נשלחת בוואטסאפ');
   });
 }
 
@@ -377,6 +378,18 @@ function summary(res) {
   return lines.join('\n');
 }
 
+/* WhatsApp message: the event details only (no bottle counts), asking for the full list and a quote */
+function waAsk(res) {
+  const lines = ['היי, בניתי באתר חבילת אלכוהול לאירוע. אשמח לקבל את רשימת הבקבוקים המלאה והצעה.'];
+  lines.push('אורחים (מקסימום): ' + S.guests, 'יום: ' + DAYS[+S.day], 'אירוע: ' + { wedding: 'חתונה', henna: 'חינה', other: 'אחר' }[S.type]);
+  lines.push('קהל: ' + { young: 'צעיר', mixed: 'מעורב', mature: 'בוגר' }[S.aud] + ', ערב: ' + { quiet: 'ארוחה ושיחה', mid: 'שילוב', party: 'מסיבה' }[S.vibe]);
+  lines.push('סיום: ' + { '1': 'עד 1:00', '3': 'עד 3:00', na: 'לא הוחלט' }[S.end]);
+  lines.push('סדר המשקאות: ' + S.rank.map(k => NAME[k]).join(', '));
+  lines.push('תקציב משוער: ' + BUD[S.budget]);
+  lines.push('לפי המחשבון: כ-' + res.L + ' ליטר');
+  return lines.join('\n');
+}
+
 let lastL = 0, liveT = 0;
 function update() {
   if (!(S.guests >= 20 && S.guests <= 1500)) return;
@@ -390,10 +403,10 @@ function update() {
   $('gauge').className = 'gauge lvl' + lv[0];
   const b = $('badge'); b.className = 'badge lvl' + lv[0]; b.textContent = lv[1];
   fillBars($('rBars'), res.qty);
-  $('rMix').innerHTML = res.mix.map(m => '<span>' + m[0] + ' ' + m[1] + '</span>').join('');
+  $('rMix').innerHTML = res.mix.map(m => '<span>' + m[1] + '</span>').join('');
   const sum = summary(res);
-  $('rwa').href = waUrl(sum);
-  $('calcField').value = sum;
+  $('rwa').href = waUrl(waAsk(res));
+  $('calcField').value = sum; /* the full list (with counts) still reaches the CRM with the form */
   clearTimeout(liveT);
   liveT = setTimeout(() => { if (res.L !== lastL) { $('live').textContent = 'החבילה מתעדכנת: כ-' + res.L + ' ליטר אלכוהול, ' + lv[1] + '.'; lastL = res.L; } }, 900);
 }

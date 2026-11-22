@@ -75,7 +75,7 @@
         cur = id;
         if (!seen[id]) { seen[id] = 1; ev('sec', id, null, (Date.now() - shown + active) / 1000); }
       });
-    }, { threshold: 0.35 });
+    }, { threshold: 0, rootMargin: "-45% 0px -45% 0px" });
     Array.prototype.forEach.call(document.querySelectorAll('main section'), function (s) { io.observe(s); });
   }
 
@@ -120,7 +120,7 @@
   var form = document.getElementById('leadForm'), fOn = false, fSeen = {};
   if (form) {
     form.addEventListener('focusin', function (e) {
-      var n = e.target && (e.target.name || e.target.id); if (!n || n === 'contact_me_by_fax_only') return;
+      var n = e.target && e.target.getAttribute && (e.target.getAttribute("name") || e.target.id); if (!n || n === 'contact_me_by_fax_only') return;
       if (!fOn) { fOn = true; ev('form_start', 'contact', n); }
       if (!fSeen[n]) { fSeen[n] = 1; ev('form_field', 'contact', n); }
     });

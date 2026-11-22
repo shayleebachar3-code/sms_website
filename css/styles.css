@@ -577,3 +577,12 @@ html.a11y-contrast .hero-photo{display:none}
 .hero-photo::after{background:linear-gradient(180deg,rgba(5,4,3,0) 55%,var(--bg) 100%)}
 .hero-photo::before{display:none}
 .hero .wrap{padding-top:calc(min(88vw,520px) + 6px)}}
+
+/* calculator result: counts are sent on WhatsApp, so the bar shows a small lock instead of a number */
+.bar .n.lk{display:flex;justify-content:flex-end;align-items:center;opacity:.75}
+.bar .n.lk::before{content:"";width:13px;height:15px;background:var(--acc);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Crect x='4' y='11' width='16' height='10' rx='2'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Crect x='4' y='11' width='16' height='10' rx='2'/%3E%3Cpath d='M8 11V7a4 4 0 0 1 8 0v4'/%3E%3C/svg%3E") center/contain no-repeat}
+.res .unlock{display:flex;gap:12px;align-items:flex-start;margin:0 0 18px;padding:14px 16px;border:1px solid rgba(var(--acc-rgb),.45);border-radius:16px;background:rgba(var(--acc-rgb),.08)}
+.res .unlock svg{flex:none;width:22px;height:22px;margin-top:3px;color:var(--acc-hi)}
+.res .unlock p{margin:0;font-size:15px;line-height:1.6;color:var(--soft)}
+.res .unlock b{display:block;color:var(--text);font-weight:600}
+.res .btns+.note{margin:16px 0 0}
