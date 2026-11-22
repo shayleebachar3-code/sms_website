@@ -9,7 +9,14 @@
   /* never count local files / dev hosts (my own tests) */
   if (location.protocol==='file:'||/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)||/\.(localhost|test)$/.test(location.hostname)) return;
   try {
-    if (/[?&]notrack=1(&|$)/.test(location.search)) localStorage.setItem('sms_notrack', '1');
+    if (/[?&]notrack=1(&|$)/.test(location.search) && localStorage.getItem('sms_notrack') !== '1') {
+      localStorage.setItem('sms_notrack', '1');
+      /* tell the stats which device is the owner's, so its earlier visits are excluded too (the random device id only, nothing personal) */
+      var ov = localStorage.getItem('sms_vid');
+      if (ov) fetch(S.SUPABASE_URL + '/rest/v1/site_events', { method: 'POST', keepalive: true,
+        headers: { 'Content-Type': 'application/json', apikey: S.SUPABASE_KEY, Authorization: 'Bearer ' + S.SUPABASE_KEY, Prefer: 'return=minimal' },
+        body: JSON.stringify([{ sid: 'owner-' + ov.slice(0, 12), vid: ov, page: '/', ev: 'nav', sec: 'owner', val: 'notrack' }]) }).catch(function () {});
+    }
     else if (/[?&]notrack=0(&|$)/.test(location.search)) localStorage.removeItem('sms_notrack');
     if (localStorage.getItem('sms_notrack') === '1') return;
   } catch (e) {}
